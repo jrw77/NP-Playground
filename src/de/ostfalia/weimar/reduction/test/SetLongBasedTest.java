@@ -3,6 +3,8 @@ package de.ostfalia.weimar.reduction.test;
 import static org.junit.Assert.*;
 
 import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.Test;
 
@@ -33,6 +35,7 @@ public class SetLongBasedTest {
 		assertTrue("contains 2", slb2.contains(2));
 		assertFalse("contains 1", slb2.contains(1));
 		assertFalse("contains 1", slb0.contains(1));
+		assertFalse("contains 1", slb2.contains(3));
 	}
 
 	@Test
@@ -63,17 +66,55 @@ public class SetLongBasedTest {
 
 	@Test
 	public void testContainsAll() {
-		fail("Not yet implemented");
+		SetLongBased slb1 = new SetLongBased(7L);
+		SetLongBased slb2 = new SetLongBased(5L);
+		assertTrue("Should contain all" , slb1.containsAll(slb2));
+		SetLongBased slb3 = new SetLongBased(10L);
+		assertFalse("Should not contain all" , slb1.containsAll(slb3));
 	}
 
 	@Test
+	public void testContainsAll2() {
+		SetLongBased slb1 = new SetLongBased(7L);
+		Set<Integer> s2 = new TreeSet<Integer>();
+		s2.add(0); 
+		s2.add(2);
+		assertTrue("Should contain all" , slb1.containsAll(s2));
+		Set<Integer> s3 = new TreeSet<Integer>();
+		s3.add(1); 
+		s3.add(3);
+		assertFalse("Should not contain all"+slb1+" "+s3 , slb1.containsAll(s3));
+	}
+
+	
+	@Test
 	public void testAddAll() {
-		fail("Not yet implemented");
+		SetLongBased slb1 = new SetLongBased(2L);
+		Set<Integer> s2 = new TreeSet<Integer>();
+		s2.add(0); 
+		s2.add(3);
+		slb1.addAll(s2);
+		assertEquals("Should be" , "1011", slb1.toString());
 	}
 
 	@Test
 	public void testRemoveAll() {
-		fail("Not yet implemented");
+		SetLongBased slb1 = new SetLongBased(15L);
+		Set<Integer> s2 = new TreeSet<Integer>();
+		s2.add(0); 
+		s2.add(3);
+		slb1.removeAll(s2);
+		assertEquals("Should be" , "110", slb1.toString());
+	}
+
+	@Test
+	public void testRetainAll() {
+		SetLongBased slb1 = new SetLongBased(14L);
+		Set<Integer> s2 = new TreeSet<Integer>();
+		s2.add(0); 
+		s2.add(3);
+		slb1.retainAll(s2);
+		assertEquals("Should be" , "1000", slb1.toString());
 	}
 
 	@Test

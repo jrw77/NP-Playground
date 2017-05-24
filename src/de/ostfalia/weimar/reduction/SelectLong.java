@@ -3,7 +3,7 @@ package de.ostfalia.weimar.reduction;
 import java.util.Arrays;
 import java.util.Set;
 
-public class SelectLong {
+public class SelectLong implements VerifyByIndexSet{
 	long[] numbers;
 	long z;
 	
@@ -39,6 +39,11 @@ public class SelectLong {
 		sb.append(" = ");
 		sb.append(z);
 		return sb.toString();
+	}
+
+	@Override
+	public int size() {
+		return numbers.length;
 	}
 
 }

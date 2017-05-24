@@ -2,10 +2,10 @@ package de.ostfalia.weimar.reduction;
 
 import java.util.Set;
 
-public class SelectLongSolveExp {
+public class IndexSetSolveExp {
 
-	public static Set<Integer> solve(SelectLong select){
-		int n = select.numbers.length;
+	public static Set<Integer> solve(VerifyByIndexSet select){
+		int n = select.size();
 		
 		if (n > 64){
 			throw new RuntimeException("way too big for me");
