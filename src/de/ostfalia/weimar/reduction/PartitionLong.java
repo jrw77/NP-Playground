@@ -2,7 +2,7 @@ package de.ostfalia.weimar.reduction;
 
 import java.util.Set;
 
-public class PartitionLong {
+public class PartitionLong  implements VerifyByIndexSet{
 	long [] numbers;
 	
 	public boolean verify(Set<Integer> indices){
@@ -15,5 +15,10 @@ public class PartitionLong {
 			sum_total += j;
 		}
 		return sum == sum_total-sum;
+	}
+
+	@Override
+	public int size() {
+		return numbers.length;
 	}
 }
