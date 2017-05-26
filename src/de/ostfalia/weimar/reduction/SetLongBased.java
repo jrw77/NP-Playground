@@ -106,6 +106,15 @@ public class SetLongBased implements Set<Integer> {
 		return true;
 	}
 
+	/**
+	 * more efficient containsAll for SetLongBased
+	 * @param other the other set
+	 * @return true if other is part of this.
+	 */
+	public boolean containsAll(SetLongBased other) {
+		return (other.l | this.l)  == this.l;
+	}
+
 	@Override
 	public boolean addAll(Collection<? extends Integer> c) {
 		boolean changed = false;
@@ -113,6 +122,12 @@ public class SetLongBased implements Set<Integer> {
 			changed |= add(i); 
 		}
 		return changed;
+	}
+
+	public boolean addAll(SetLongBased other) {
+		long old = l;
+		this.l |= other.l;
+		return l != old;
 	}
 
 	@Override
@@ -129,6 +144,12 @@ public class SetLongBased implements Set<Integer> {
 		return changed;
 	}
 
+	public boolean retainAll(SetLongBased other) {
+		long old = l;
+		this.l &= other.l;
+		return l != old;
+	}
+
 	@Override
 	public boolean removeAll(Collection<?> c) {
 		boolean changed = false;
@@ -136,6 +157,20 @@ public class SetLongBased implements Set<Integer> {
 			changed |= remove(o); 
 		}
 		return changed;
+	}
+	
+	public boolean removeAll(SetLongBased other) {
+		long old = l;
+		this.l &= ~other.l;
+		return l != old;
+	}
+	
+	/**
+	 * return the complement of the current set, up to nmax.
+	 * @return the complement.
+	 */
+	public SetLongBased complement(int nmax){
+		return new SetLongBased(~l & ((1<<(nmax+1))-1));
 	}
 
 	@Override
