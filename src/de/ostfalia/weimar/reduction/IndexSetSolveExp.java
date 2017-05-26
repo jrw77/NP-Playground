@@ -2,8 +2,18 @@ package de.ostfalia.weimar.reduction;
 
 import java.util.Set;
 
+/**
+ * An exponential solver for all Problems solvable by am IndexSet.
+ * @author weimar
+ *
+ */
 public class IndexSetSolveExp {
 
+	/**
+	 * Solve exponentially, uses 2^n steps and only works for n<64.
+	 * @param select Which problem to solve
+	 * @return Ths set which solves this problem or null  if the problem has no solution.
+	 */
 	public static Set<Integer> solve(VerifyByIndexSet select){
 		int n = select.size();
 		
